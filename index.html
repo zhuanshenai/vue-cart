@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>2017.12.25demo_car</title>
+	<meta charset="utf-8">
+	<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
+	<meta http-equiv='X-UA-Compatible' IE='Edge'>
+	<link rel="stylesheet" href='styles/input.css'>
+</head>
+<body>
+<div id='app1'>
+	<div class='container'>
+		<div class='box'>
+			<div class='header'>
+				<ol>
+					<li>商品信息</li>
+					<li>单价</li>
+					<li>数量</li>
+					<li>金额</li>
+					<li>操作</li>
+				</ol>
+			</div>
+			<div class='content'>
+				<ul>
+					<li v-for='(item,index) of productList'>
+						<div class='inner'>
+							<a href="javascript:;" class='arrow' v-bind:class='{arrow_active:item.isChecked}' @click='choose(item)'></a>
+							<a href="javascript:;"><img :src="item.productUrl"></a>
+							<h1><a href="javascript:;">{{ item.productName }}</a></h1>
+						</div>
+						<p><span>{{ item.productPrice | formatPrice }}</span><strong>{{ (item.productPrice * item.productDiscount) | formatPrice }}</strong></p>
+						<h2>
+							<a href="javascript:;" class='minus' @click='changeEquantity(item, -1)'>-</a>
+							<input type="text" v-model='item.productEquantity'>
+							<a href="javascript:;" class='plus' @click='changeEquantity(item, 1)'>+</a>
+						</h2>
+						<h3>{{ (item.productPrice * item.productDiscount * item.productEquantity) | formatPrice }}</h3>
+						<h4 @click='removeItem(index)'>删除</h4>
+					</li>
+				</ul>
+			</div>
+			<div class='footer'>
+				<div>
+					<a href="javascript:;" class='arrow' v-bind:class='{arrow_active:allIsChecked}' @click='chooseAll'></a>
+					<span>全选</span>
+				</div>
+				<div class='total'>
+					<p>已选商品<strong>{{ totalList }}</strong>件</p>
+					<h2>合计（不含运费）：<strong>{{ totalPrice | formatPrice }}</strong></h2>
+					<button>结算</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src='js/vue.js'></script>
+<script src='js/js.js'></script>
+</body>
+</html>
