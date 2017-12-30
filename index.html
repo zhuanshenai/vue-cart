@@ -41,8 +41,9 @@
 			</div>
 			<div class='footer'>
 				<div>
-					<a href="javascript:;" class='arrow' v-bind:class='{arrow_active:allIsChecked}' @click='chooseAll'></a>
-					<span>全选</span>
+					<a href="javascript:;" class='arrow' v-bind:class='{arrow_active:allIsChecked}'></a>
+					<span @click='chooseAll(true)'>全选</span>
+					<span @click='chooseAll(false)'>取消全选</span>
 				</div>
 				<div class='total'>
 					<p>已选商品<strong>{{ totalList }}</strong>件</p>

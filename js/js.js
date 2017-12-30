@@ -67,6 +67,10 @@ var vm = new Vue({
 			}else{
 				item.isChecked = !item.isChecked;
 			};
+			this.allIsChecked = this.productList.every((item)=>{
+				return item.isChecked;
+			});
+			//this.chooseAll(this.allIsChecked);
 			this.calculateTotal();
 			this.calculateTotalList();
 		},
@@ -83,13 +87,15 @@ var vm = new Vue({
 				}
 			})
 		},
-		chooseAll(){
+		chooseAll(flag){
+			this.allIsChecked = flag;
 			this.productList.forEach((item)=>{
 				if(!item.isChecked){
-					this.$set(item, 'isChecked', true);
+					this.$set(item, 'isChecked', this.allIsChecked);
+				}else{
+					item.isChecked = this.allIsChecked;
 				}
 			})
-			this.allIsChecked = !this.allIsChecked;
 			this.calculateTotal();
 			this.calculateTotalList();
 		}
